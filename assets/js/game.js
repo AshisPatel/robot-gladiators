@@ -6,7 +6,7 @@ var playerMoney = 10;
 console.log(playerName, playerAttack,playerHealth, playerMoney);
 
 var enemyNames = ["Roborto","Amy Android", "Robo Trumble"];
-var enemyHealth = 50;
+var enemyHealth = Math.floor((Math.random * 21))+ 40;
 var enemyAttack = 12; 
 
 var fight = function(enemyName) {
@@ -30,7 +30,8 @@ var fight = function(enemyName) {
 
         if (promptFight === "fight" || promptFight === "FIGHT") {
             //Subtract the value of 'playerAttack' from 'enemyHealth'
-            enemyHealth = enemyHealth - playerAttack;
+            var damage = randomNumber(playerAttack - 3, playerAttack);
+            enemyHealth = Math.max(0, enemyHealth - damage);
 
             //Log a resulting message to the console so we know that it worked
             console.log(
@@ -47,7 +48,8 @@ var fight = function(enemyName) {
             }
 
             //Subtract the value of 'enemyAttack' from the 'playerHealth'
-            playerHealth = playerHealth - enemyAttack; 
+            var damage = (enemyAttack - 3, enemyAttack);
+            playerHealth = Math.max(0, playerHealth - damage); 
 
             //Log a resulting message to the console so we know it worked
             console.log(
@@ -97,7 +99,7 @@ var startGame = function() {
         //Set enemy name in a more readable way 
         var pickedEnemyName = enemyNames[i];
         //Reset enemy health between rounds 
-        enemyHealth = 50; 
+        enemyHealth = randomNumber(40,60);
         //Passes enemy name into function
         fight(pickedEnemyName);
 
@@ -191,6 +193,12 @@ var shop = function() {
             break;
     }       
 
+};
+
+//function to randomily select a number between 40 & 60
+var randomNumber = function(min, max) {
+    var value = Math.floor((Math.random() * (max - min + 1)) + min);
+    return value; 
 };
 
 //start game when page loads
